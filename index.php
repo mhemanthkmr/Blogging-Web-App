@@ -5,5 +5,5 @@ include('includes/header.php');
 
 
 <?php
-include('include/footer.php');
+include('includes/footer.php');
 ?>
