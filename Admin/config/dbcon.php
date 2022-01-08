@@ -3,14 +3,14 @@
 $host = "localhost";
 $username = "mhemanthkmr";
 $password = "hemanth123";
-$database = "phpcrud";
+$database = "Blog";
 
 $con = mysqli_connect("$host","$username","$password","$database");
-
-if($con)
+// print_r($con);
+if(!$con)
 {
-    header("Location: ../errors/error.php");
+    header("Location: ../errors/404.html");
     die();
 }
-
+// echo "Connection Successfull";
 ?>

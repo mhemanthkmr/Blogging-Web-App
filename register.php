@@ -11,7 +11,7 @@ include('includes/header.php');
                         <h4>Register</h4>
                     </div>
                     <div class="card-body">
-                        <form action="code.php" class="">
+                        <form action="code.php" method="post" class="">
                             <div class="form-group mb-3">
                                 <label for="name">Name</label>
                                 <input type="name" placeholder="Enter Name" class = "form-control" name="name">
