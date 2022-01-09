@@ -14,6 +14,7 @@ if(isset($_POST['register_btn'])){
         $checkmail_run = mysqli_query($con,$checkmail);
         if(mysqli_num_rows($checkmail_run)>0)
         {
+            $_SESSION['flag'] = 2;
             $_SESSION['message'] = "Already email exist";
             header("Location: register.php");
             exit(0);
@@ -28,12 +29,14 @@ if(isset($_POST['register_btn'])){
             if($user_query_run)
             {
                 $_SESSION['message'] = "Registered Successfully";
-                header("Location: register.php");
+                $_SESSION['flag'] = 1;
+                header("Location: login.php");
                 exit(0);
             }
             else
             {
                 $_SESSION['message'] = "Something is Wrong"."$user_query_run";
+                $_SESSION['flag'] = 2;
                 header("Location: register.php");
                 exit(0);
             }
@@ -42,6 +45,7 @@ if(isset($_POST['register_btn'])){
     else 
     {
         $_SESSION['message'] = "Password and Confirm Password does not match";
+        $_SESSION['flag'] = 2;
         header("Location: register.php");
         exit(0);
     }

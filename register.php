@@ -16,19 +16,19 @@ include('includes/header.php');
                         <form action="registercode.php" method="POST" class="">
                             <div class="form-group mb-3">
                                 <label for="name">Name</label>
-                                <input type="name" placeholder="Enter Name" class = "form-control" name="name">
+                                <input required type="name" placeholder="Enter Name" class = "form-control" name="name">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" placeholder="Enter Email" class = "form-control" name="email">
+                                <input required type="email" placeholder="Enter Email" class = "form-control" name="email">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password">Password</label>
-                                <input type="password" placeholder="Enter Password" class = "form-control" name="password">
+                                <input required type="password" placeholder="Enter Password" class = "form-control" name="password">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password">Confirm Password</label>
-                                <input type="password" placeholder="Enter Confirm Password" class = "form-control" name="cpassword">
+                                <input required type="password" placeholder="Enter Confirm Password" class = "form-control" name="cpassword">
                             </div>
                             <div class="form-group mb-3 text-center">
                                 <button class="btn btn-primary" name = "register_btn" type="submit">Register</button>
