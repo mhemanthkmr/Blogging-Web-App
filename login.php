@@ -1,5 +1,11 @@
 <?php 
 session_start();
+if (isset($_SESSION['auth'])) {
+    $_SESSION['flag'] = 2;
+    $_SESSION['message'] = "You are aldready logged in";
+    header("Location: index.php");
+    exit(0);
+}
 include('includes/header.php');
 ?>
 
@@ -13,14 +19,14 @@ include('includes/header.php');
                         <h4 class="text-center">Login</h4>
                     </div>
                     <div class="card-body">
-                        <form action="code.php" class="">
+                        <form action="logincode.php" method = "POST" class="">
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" placeholder="Enter Email" class = "form-control" name="email">
+                                <input required type="email" placeholder="Enter Email" class = "form-control" name="email">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password">Password</label>
-                                <input type="password" placeholder="Enter Password" class = "form-control" name="password">
+                                <input required type="password" placeholder="Enter Password" class = "form-control" name="password">
                             </div>
                             <div class="form-group mb-3 text-center">
                                 <button class="btn btn-primary"  type="submit" name="login_btn">Login</button>
