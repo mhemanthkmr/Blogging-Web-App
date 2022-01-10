@@ -23,21 +23,21 @@ include('includes/header.php');
                             $users = "SELECT * FROM users WHERE id='$user_id'";
                             // die($users);
                             $users_run = mysqli_query($con,$users);
-
                             if(mysqli_num_rows($users_run) > 0)
                             { 
                                 foreach($users_run as $user)
+                                // die($user);
                                 { ?>
-                                    <form action="code.php" method="post">
+                                    <form action="code.php" method="POST">
                                         <input type="hidden" name="user-id" value="<?=$user['id'];?>">
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="">Name</label>
-                                                <input type="text" value="<?=$user['name']?>"  class="form-control">
+                                                <input name = "name" type="text" value="<?=$user['name']?>"  class="form-control">
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="">Email</label>
-                                                <input type="text" value="<?=$user['email']?>" class="form-control">
+                                                <input name="email" type="text" value="<?=$user['email']?>" class="form-control">
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="">Role</label>
@@ -53,7 +53,7 @@ include('includes/header.php');
                                                 <input type="checkbox" <?=($user['status'] == '1' ? 'checked' : '');?> name="status" width="70px" height="70px" id="">
                                             </div>
                                             <div class="text-center col-md-12 mb-3">
-                                                <button class="text-center btn btn-primary" name="upadte_user" type="submit">Update</button>
+                                                <button class="text-center btn btn-primary" name="update_user" type="submit">Update</button>
                                             </div>
                                         </div>
                                     </form>

@@ -11,6 +11,7 @@ include('includes/header.php');
     </ol>
     <div class="row">
         <div class="col-md-12">
+            <?php include('message.php'); ?>
             <div class="card ">
                 <div class="card-header">
                     <h5 class="">Registered Users</h5>
