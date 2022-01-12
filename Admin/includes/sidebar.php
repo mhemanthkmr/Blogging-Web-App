@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -67,7 +68,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <?=$_SESSION['auth_user']['user_name']?>
                     </div>
                 </nav>
             </div>
