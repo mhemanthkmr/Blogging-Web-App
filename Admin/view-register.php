@@ -17,10 +17,10 @@ include('includes/header.php');
                     <h5 class="">Registered Users</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped table-dark">
+                    <table class="table table-responsive table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>S.No</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
@@ -34,11 +34,11 @@ include('includes/header.php');
                                 $query_run = mysqli_query($con,$query);
 
                                 if(mysqli_num_rows($query_run) > 0)
-                                {
+                                {   $i=1;
                                     foreach($query_run as $row)
                                     { ?>
                                         <tr>
-                                            <td><?=$row['id']?></td>
+                                            <td><?=$i?></td>
                                             <td><?=$row['name']?></td>
                                             <td><?=$row['email']?></td>
                                             <td>
@@ -54,8 +54,12 @@ include('includes/header.php');
                                                 ?>
                                             </td>
                                             <td><a href="register-edit.php?id=<?=$row['id'];?>" class="btn btn-sm btn-primary">Edit</a></td>
-                                            <td><a class="btn btn-sm btn-danger">Delete</a></td>
-                                        </tr> <?php
+                                            <td>
+                                                <form action="code.php" method="post">
+                                                    <button name="user_delete" value="<?=$row['id']?>" class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr> <?php  $i += 1;
                                     }
                                 }
                                 else
