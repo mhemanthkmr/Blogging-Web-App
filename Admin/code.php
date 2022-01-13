@@ -1,7 +1,89 @@
 <?php 
 include('authentication.php');
 // die(print_r($_POST));
-
+if(isset($_POST['category_delete_permanent']))
+{
+    $user_id = $_POST['id'];
+    $user_delete = "DELETE FROM categories WHERE id='$user_id'";
+    // die($user_delete);
+    $query_run = mysqli_query($con,$user_delete);
+    if($query_run)
+    {
+        $_SESSION['flag'] = 1;
+        $_SESSION['message'] = "Category Deleted Successfully";
+        header("Location: category-delete-view.php");
+        exit(0);
+    }
+    else 
+    {
+        $_SESSION['flag'] = 2;
+        $_SESSION['message'] = "Something Wrong";
+        header("Location: category-delete-view.php");
+        exit(0);
+    }
+    
+}
+if(isset($_POST['category_revoke']))
+{
+    $user_id = $_POST['id'];
+    $user_delete = "UPDATE `categories` SET `status` = '0' WHERE (`id` = '$user_id');";
+    $query_run = mysqli_query($con,$user_delete);
+    if($query_run)
+    {
+        $_SESSION['flag'] = 1;
+        $_SESSION['message'] = "Category Revoked Successfully";
+        header("Location: category-view.php");
+        exit(0);
+    }
+    else 
+    {
+        $_SESSION['flag'] = 2;
+        $_SESSION['message'] = "Something Wrong";
+        header("Location: category-view.php");
+        exit(0);
+    }
+}
+if(isset($_POST['category_delete']))
+{
+    $user_id = $_POST['user_id'];
+    $user_delete = "UPDATE `categories` SET `status` = '2' WHERE (`id` = '$user_id');";
+    $query_run = mysqli_query($con,$user_delete);
+    if($query_run)
+    {
+        $_SESSION['flag'] = 1;
+        $_SESSION['message'] = "Category Deleted Successfully";
+        header("Location: category-view.php");
+        exit(0);
+    }
+    else 
+    {
+        $_SESSION['flag'] = 2;
+        $_SESSION['message'] = "Something Wrong";
+        header("Location: category-view.php");
+        exit(0);
+    }
+}
+if(isset($_POST['category_delete']))
+{
+    $user_id = $_POST['user_id'];
+    $user_delete = "UPDATE `categories` SET `status` = '2' WHERE (`id` = '$user_id');";
+    $query_run = mysqli_query($con,$user_delete);
+    if($query_run)
+    {
+        $_SESSION['flag'] = 1;
+        $_SESSION['message'] = "Category Deleted Successfully";
+        header("Location: category-view.php");
+        exit(0);
+    }
+    else 
+    {
+        $_SESSION['flag'] = 2;
+        $_SESSION['message'] = "Something Wrong";
+        header("Location: category-view.php");
+        exit(0);
+    }
+    
+}
 if(isset($_POST['update-category']))
 {
     // die(print_r($_POST));
