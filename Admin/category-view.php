@@ -30,7 +30,7 @@ include('includes/header.php');
                         </thead>
                         <tbody>
                                 <?php 
-                                    $category = "SELECT * FROM categories";
+                                    $category = "SELECT * FROM categories WHERE status != 2";
                                     $category_run = mysqli_query($con, $category);
                                     if(mysqli_num_rows($category_run) > 0)
                                     { $i=1;
@@ -41,7 +41,12 @@ include('includes/header.php');
                                                 <td><?=$item['name'];?></td>
                                                 <td><?=$item['status'] == 1 ? 'Visible' : 'Hidden';?></td>
                                                 <td><a href="category-edit.php?id=<?=$item['id']?>" class="btn btn-sm btn-warning" type="submit">Edit</a></td>
-                                                <td><button class="btn btn-sm btn-danger" type="submit">Delete</button></td>
+                                                <td>
+                                                    <form action="code.php" method="post">
+                                                        <input type="hidden" name="user_id" value="<?=$item['id'];?>">
+                                                        <button class="btn btn-sm btn-danger" name="category_delete" type="submit">Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr> <?php
                                         }
                                     } 
