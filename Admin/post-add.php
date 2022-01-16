@@ -18,12 +18,12 @@ include('includes/header.php');
                     <h5 class="">Add Post</h5>
                 </div>
                 <div class="card-body">
-                    <form action="code.php" method="POST">
+                    <form action="code.php" method="POST" enctype="multipart/form-data">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="">Catogory List</label>
                                 <?php 
-                                    $category = "SELECT * FROM categories WHERE status = '0'";
+                                    $category = "SELECT * FROM categories WHERE status = '1'";
                                     $category_run = mysqli_query($con, $category);
                                     // die($category);
                                     if(mysqli_num_rows($category_run))
@@ -47,35 +47,40 @@ include('includes/header.php');
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Name</label>
-                                <input name = "name" type="text" max="191" class="form-control">
+                                <input required name = "name" type="text" max="191" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Slug(URL)</label>
-                                <input name = "slug" type="text" max="191" class="form-control">
+                                <input required name = "slug" type="text" max="191" class="form-control">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="">Description</label>
-                                <textarea name="description" id="" class="form-control" rows="4"></textarea>
+                                <textarea required name="description" id="" class="form-control" rows="4"></textarea>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="">Meta Title</label>
-                                <input name = "meta-title" type="text" max="191" class="form-control">
+                                <input required name = "meta-title" type="text" max="191" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Meta Description</label>
-                                <textarea name="meta-description" id="" class="form-control" rows="4"></textarea>
+                                <textarea required name="meta-description" id="" class="form-control" rows="4"></textarea>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Meta Keyword</label>
-                                <textarea name="meta-keyword" id=""   class="form-control" rows="4"></textarea>
+                                <textarea required name="meta-keyword" id=""   class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Image</label>
+                                <input name = "image" type="file" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Status</label>
                                 <input type="checkbox"  name="status" width="70px" height="70px" id="">
                             </div>
                             <div class="text-center col-md-12 mb-3">
-                                <button class="text-center btn btn-primary" name="add-category" type="submit">Save Category</button>
+                                <button class="text-center btn btn-primary" name="post_add" type="submit">Add Post</button>
                             </div>
+                            
                         </div>
                     </form>                
                 </div>

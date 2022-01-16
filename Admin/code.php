@@ -1,6 +1,42 @@
 <?php 
 include('authentication.php');
 // die(print_r($_POST));
+if(isset($_POST['post_add']))
+{
+    $id = $_POST['cato_id'];
+    // die($id);
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $description = $_POST['description'];
+    $meta_title = $_POST['meta-title'];
+    $meta_description = $_POST['meta-description'];
+    $meta_keyword = $_POST['meta-keyword'];
+    $image = $_FILES['image']['name'];
+    // Renaming Image 
+
+    $image_extension = pathinfo($image, PATHINFO_EXTENSION);
+    $filename = time().".".$image_extension;
+    $status = $_POST['status'] == true ? '1' : '0';
+    $query = "INSERT INTO `posts`(`category_id`, `slug`, `description`, `image`, `meta_title`, `meta_description`, `meta_keyword`, `status`, `name`) VALUES ('$id','$slug','$description','$filename','$meta_title','$meta_description','$meta_keyword','$status','$name')";
+    $query_run = mysqli_query($con,$query);
+    // die(print_r($_FILES));
+    if($query_run)
+    {
+        move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/posts/'.$filename);
+        $_SESSION['flag'] = 1;
+        $_SESSION['message'] = "Post Added Successfully";
+        header("Location: post-add.php");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['flag'] = 2;
+        $_SESSION['message'] = "Something Wrong";
+        header("Location: post-add.php");
+        exit(0);
+    }
+}
+
 if(isset($_POST['category_delete_permanent']))
 {
     $user_id = $_POST['id'];
@@ -43,26 +79,7 @@ if(isset($_POST['category_revoke']))
         exit(0);
     }
 }
-if(isset($_POST['category_delete']))
-{
-    $user_id = $_POST['user_id'];
-    $user_delete = "UPDATE `categories` SET `status` = '2' WHERE (`id` = '$user_id');";
-    $query_run = mysqli_query($con,$user_delete);
-    if($query_run)
-    {
-        $_SESSION['flag'] = 1;
-        $_SESSION['message'] = "Category Deleted Successfully";
-        header("Location: category-view.php");
-        exit(0);
-    }
-    else 
-    {
-        $_SESSION['flag'] = 2;
-        $_SESSION['message'] = "Something Wrong";
-        header("Location: category-view.php");
-        exit(0);
-    }
-}
+
 if(isset($_POST['category_delete']))
 {
     $user_id = $_POST['user_id'];

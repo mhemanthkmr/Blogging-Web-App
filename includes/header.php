@@ -10,4 +10,5 @@
     <title>Home</title>
 </head>
 <body>
-    <?php include('navbar.php')?>
+    <?php include('navbar.php');
+    ?>
