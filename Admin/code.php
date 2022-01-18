@@ -1,6 +1,58 @@
 <?php 
 include('authentication.php');
 // die(print_r($_POST));
+
+if(isset($_POST['update-post']))
+{
+    // die(print_r($_POST));
+    $id = $_POST['id'];
+    // die($id);
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $description = $_POST['description'];
+    $meta_title = $_POST['meta-title'];
+    $meta_description = $_POST['meta_description'];
+    $meta_keyword = $_POST['meta-keyword'];
+    $status = $_POST['status'] == true ? '1' : '0';
+    $old_image = $_POST['old'];
+    $image = $_FILES['image']['name'];
+    if($image != NULL)
+    {
+        $image_extension = pathinfo($image, PATHINFO_EXTENSION);
+        $filename = time().".".$image_extension;
+        $updated_filename = $filename;
+    }
+    else 
+    {
+        $updated_filename = $old_image;
+    }
+    // $query = "INSERT INTO categories(name,slug,description,meta-title,meta-description,meta-keyword,navbar-status,status) VALUES ('$name','$slug','$description','$meta_title','$meta_description','$meta_keyword','$navbar_status','$status')";
+    $query1 = "INSERT INTO `categories` (`name`, `slug`, `description`, `meta-title`, `meta-description`, `meta-keyword`, `navbar-status`, `status`) VALUES ('$name','$slug','$description','$meta_title','$meta_description','$meta_keyword','$navbar_status','$status')";
+    $query = "UPDATE `posts` SET `name` = '$name', `slug` = '$slug', `description` = '$description', `meta_title` = '$meta_title', `meta_description` = '$meta_description', `meta_keyword` = '$meta_keyword',`status` = '$status',`image` = '$updated_filename' WHERE (`id` = '$id');";
+    // die($query);
+    // die($query);
+    $query_run = mysqli_query($con,$query);
+    if($query_run)
+    {
+        if ($image != NULL)
+        {
+            move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/posts/'.$filename);
+        }
+        $_SESSION['flag'] = 1;
+        $_SESSION['message'] = "Post Updated Successfully";
+        header("Location: post-view.php");
+        exit(0);
+    }
+    else 
+    {
+        $_SESSION['flag'] = 2;
+        $_SESSION['message'] = "Something Wrong";
+        header("Location: post-view.php");
+        exit(0);
+    }
+}
+
+
 if(isset($_POST['post_delete']))
 {
     $user_id = $_POST['user_id'];
