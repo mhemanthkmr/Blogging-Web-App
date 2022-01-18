@@ -36,6 +36,9 @@ if(isset($_POST['update-post']))
     {
         if ($image != NULL)
         {
+            if (file_exists('../uploads/posts/'.$old_image)) {
+                unlink('../uploads/posts/'.$old_image);
+            }
             move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/posts/'.$filename);
         }
         $_SESSION['flag'] = 1;
