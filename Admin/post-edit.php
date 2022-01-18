@@ -20,8 +20,8 @@ include('includes/header.php');
                 <div class="card-body">
                     <?php 
                         if(isset($_GET['id'])) {
-                            $user_id = $_GET['id'];
-                            $users = "SELECT * FROM posts WHERE id='$user_id'";
+                            $post_id = $_GET['id'];
+                            $users = "SELECT * FROM posts WHERE id='$post_id'";
                             // die($users);
                             $users_run = mysqli_query($con,$users);
                             if(mysqli_num_rows($users_run) > 0)
@@ -29,8 +29,9 @@ include('includes/header.php');
                                 foreach($users_run as $user)
                                 // die(print_r($user));
                                 { ?>
-                                    <form action="code.php" method="POST">
-                                        <input type="hidden" name="id" value="<?=$user_id?>">
+                                    <form action="code.php" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?=$post_id?>">
+                                        <input type="hidden" name="old" value="<?=$user['image'];?>">
                                         <div class="col-md-12 mb-3">
                                             <label for="">Catogory List</label>
                                             <?php 
@@ -45,7 +46,7 @@ include('includes/header.php');
                                                         foreach($category_run as $item)
                                                         {  
                                                     ?>
-                                                        <option value="<?=$item['id']?>"><?=$item['name']?></option>
+                                                        <option value="<?=$item['id']?>" <?=$item['id'] == $user['category_id'] ? 'selected' : '' ?>><?=$item['name']?></option>
                                                     <?php    } ?>
                                                     </select>        
                                                 <?php
@@ -82,11 +83,15 @@ include('includes/header.php');
                                                 <textarea value="" name="meta-keyword" id=""   class="form-control" rows="4"><?=$user['meta_keyword']?></textarea>
                                             </div>
                                             <div class="col-md-6 mb-3">
+                                                <label for="">Image</label>
+                                                <input name = "image" type="file" class="form-control">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
                                                 <label for="">Status</label>
                                                 <input type="checkbox" <?=($user['status'] == '1' ? 'checked' : '');?> name="status" width="70px" height="70px" id="">
                                             </div>
                                             <div class="text-center col-md-12 mb-3">
-                                                <button class="text-center btn btn-primary" name="update-category" type="submit">Update Category</button>
+                                                <button class="text-center btn btn-primary" name="update-post" type="submit">Update Post</button>
                                             </div>
                                         </div>
                                     </form>  <?php    
