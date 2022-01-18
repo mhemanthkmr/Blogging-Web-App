@@ -1,6 +1,29 @@
 <?php 
 include('authentication.php');
 // die(print_r($_POST));
+if(isset($_POST['post_delete']))
+{
+    $user_id = $_POST['user_id'];
+    $user_delete = "DELETE FROM posts WHERE id='$user_id'";
+    // die($user_delete);
+    $query_run = mysqli_query($con,$user_delete);
+    if($query_run)
+    {
+        $_SESSION['flag'] = 1;
+        $_SESSION['message'] = "Post Deleted Successfully";
+        header("Location: post-view.php");
+        exit(0);
+    }
+    else 
+    {
+        $_SESSION['flag'] = 2;
+        $_SESSION['message'] = "Something Wrong";
+        header("Location: category-delete-view.php");
+        exit(0);
+    }
+    
+}
+
 if(isset($_POST['post_add']))
 {
     $id = $_POST['cato_id'];
