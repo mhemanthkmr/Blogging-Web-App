@@ -50,6 +50,7 @@ include('includes/header.php');
                                                     <td>
                                                         <form action="code.php" method="post">
                                                             <input type="hidden" name="user_id" value="<?=$item['id'];?>">
+                                                            <input type="hidden" name="img" value="<?=$item['image'];?>">
                                                             <button class="btn btn-sm btn-danger" name="post_delete" type="submit">Delete</button>
                                                         </form>
                                                     </td>
