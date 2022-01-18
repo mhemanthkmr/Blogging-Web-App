@@ -61,9 +61,16 @@ if(isset($_POST['post_delete']))
     $user_id = $_POST['user_id'];
     $user_delete = "DELETE FROM posts WHERE id='$user_id'";
     // die($user_delete);
+    $image = $_POST['img'];
     $query_run = mysqli_query($con,$user_delete);
     if($query_run)
     {
+        if ($image != NULL)
+        {
+            if (file_exists('../uploads/posts/'.$image)) {
+                unlink('../uploads/posts/'.$image);
+            }
+        }
         $_SESSION['flag'] = 1;
         $_SESSION['message'] = "Post Deleted Successfully";
         header("Location: post-view.php");
