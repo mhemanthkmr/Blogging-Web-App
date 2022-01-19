@@ -238,13 +238,14 @@ if(isset($_POST['add-category']))
 
 
     // $query = "INSERT INTO categories(name,slug,description,meta-title,meta-description,meta-keyword,navbar-status,status) VALUES ('$name','$slug','$description','$meta_title','$meta_description','$meta_keyword','$navbar_status','$status')";
-    $query1 = "INSERT INTO 'categories` (`name`, `slug`, `description`, `meta-title`, `meta-description`, `meta-keyword`, `navbar-status`, `status`) VALUES ('$name','$slug','$description','$meta_title','$meta_description','$meta_keyword','$navbar_status','$status')";
+    $query1 = "INSERT INTO `categories` (`name`, `slug`, `description`, `meta-title`, `meta-description`, `meta-keyword`, `navbar-status`, `status`) VALUES ('$name','$slug','$description','$meta_title','$meta_description','$meta_keyword','$navbar_status','$status')";
     $query_run = mysqli_query($con,$query1);
+    // die($query_run.'HELlo');
     if($query_run)
     {
         $_SESSION['flag'] = 1;
         $_SESSION['message'] = "Catogory Added Successfully";
-        header("Location: category-add.php");
+        header("Location: category-view.php");
         exit(0);
     }
     else 
